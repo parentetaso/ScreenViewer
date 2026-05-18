@@ -1,16 +1,61 @@
-# ScreenViewer - WiFi Screen Sharing Application
+# ScreenViewer - Transmisión de Pantalla por WiFi
 
 ScreenViewer es una aplicación multiplataforma diseñada para iOS y Android que permite la recepción, visualización y gestión remota de flujos de pantalla mediante conexión inalámbrica. El sistema elimina la dependencia de interfaces físicas por cable mediante la implementación de protocolos de transmisión de bajo retardo, ofreciendo una experiencia estable para entornos profesionales, educativos y de soporte técnico.
 
+## 🚀 Inicio Rápido
+
+### Primera vez:
+```bash
+cd screenviewer
+python setup.py
+```
+
+El instalador automático:
+- ✅ Instala todas las dependencias
+- ✅ Configura el firewall
+- ✅ Crea accesos directos
+- ✅ Guarda tu configuración
+
+### Próximas veces:
+```bash
+python setup.py
+```
+
+Detectará que ya está configurado y saltará pasos innecesarios.
+
+## 📱 Cómo Conectar tu Celular
+
+1. **Abre el servidor** en tu computadora con `python setup.py`
+2. **Abre tu navegador** en la URL que aparece (ej: `http://192.168.1.100:8080`)
+3. **Presiona "Iniciar Servidor"** en la interfaz web
+4. **En tu celular:**
+
+   **🍎 iPhone/iPad:**
+   - Abre Centro de Control (desliza hacia abajo)
+   - Toca "Grabación de pantalla" 🎯
+   - Mantén presionado hasta ver opciones
+   - Selecciona una app compatible como **LetsView** (gratis)
+   
+   **🤖 Android:**
+   - Desliza el panel de notificaciones
+   - Busca "Transmitir", "Smart View" o "Cast"
+   - Selecciona una app compatible como **LetsView** (gratis)
+
+5. **¡Listo!** Tu pantalla se verá en la computadora
+
+> 💡 **Importante:** Ambos dispositivos deben estar en la misma red WiFi
+
 ## Características
 
+- 🌐 **Interfaz Web Moderna**: Control desde cualquier navegador
 - 📡 **Conexión WiFi**: Transmisión de pantalla sin cables
 - ⚡ **Bajo Retardo**: Protocolo optimizado para mínima latencia
 - 🗜️ **Compresión**: Datos comprimidos para mejor rendimiento
 - 🔒 **Verificación**: Checksum CRC32 para integridad de datos
-- 📊 **Estadísticas en Tiempo Real**: FPS, latencia y uso de datos
+- 📊 **Estadísticas en Tiempo Real**: FPS, clientes conectados, frames
 - 🖥️ **Multi-monitor**: Soporte para múltiples monitores
-- 👥 **Múltiples Clientes**: Hasta 5 clientes simultáneos
+- 👥 **Múltiples Clientes**: Hasta 5 dispositivos simultáneos
+- 🎨 **Interfaz Bonita**: Diseño moderno y responsivo
 
 ## Arquitectura
 
@@ -52,8 +97,24 @@ pip install -r requirements.txt
 
 ## Uso
 
-### Iniciar el Servidor (en la máquina con la pantalla a compartir)
+### Con el Instalador Automático (Recomendado)
 
+```bash
+python setup.py
+```
+
+Esto abrirá la interfaz web en tu navegador donde podrás controlar todo.
+
+### Manualmente
+
+**Iniciar la interfaz web:**
+```bash
+python server/web_server.py
+```
+
+Luego abre tu navegador en `http://localhost:8080` o la IP que se muestre.
+
+**Servidor clásico (sin interfaz web):**
 ```bash
 # Modo básico
 python server/server.py
@@ -142,14 +203,16 @@ El protocolo utiliza TCP sobre WiFi con el siguiente formato de mensaje:
 
 ```
 screenviewer/
+├── setup.py               # ⭐ Instalador y lanzador automático
 ├── common/
-│   └── __init__.py      # Utilidades compartidas
+│   └── __init__.py        # Utilidades compartidas
 ├── server/
-│   └── server.py        # Servidor de captura
+│   ├── server.py          # Servidor de captura (clásico)
+│   └── web_server.py      # 🌐 Servidor web con interfaz gráfica
 ├── client/
-│   └── client.py        # Cliente visualizador
-├── requirements.txt     # Dependencias
-└── README.md           # Este archivo
+│   └── client.py          # Cliente visualizador
+├── requirements.txt       # Dependencias
+└── README.md              # Documentación
 ```
 
 ## Rendimiento
