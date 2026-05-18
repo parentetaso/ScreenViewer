@@ -1,7 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=ScreenViewer Server
-Exec=/usr/local/bin/python /workspace/screenviewer/server/server.py
-Terminal=true
-Type=Application
-Categories=Utility;
